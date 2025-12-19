@@ -66,8 +66,8 @@ footer {
 }
 
 .chart-wrapper {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   margin: 0 auto;
 }
 
@@ -87,4 +87,30 @@ footer {
 .recomendation-item {
   font-size: 14px;
   padding-left: 1.5rem;
+}
+
+.lh-normal {
+  line-height: normal;
+}
+
+.info-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  border: 1px solid #dee2e6;
+  border-left: 4px solid #0dc6fd;
+  padding: 5px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #495057;
+}
+
+.info-icon {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.info-text {
+  line-height: 1.5;
+  font-size: 12px;
 }

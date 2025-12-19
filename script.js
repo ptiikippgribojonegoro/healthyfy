@@ -101,9 +101,15 @@ function postBMI(e) {
     ${desc.text}
   </p>
 
-  <small class="text-muted">
+  <small class="text-gray">
     Rentang kategori: <b>${desc.range}</b>
   </small>
+  <div class="px-3 mt-3">
+    <div class="info-note mb-2 bg-white">
+      <span class="info-icon">🧮</span>
+      <span class="info-text text-start">Hasil BMI ini bertujuan memberikan gambaran umum mengenai kondisi berat badan berdasarkan data yang Anda masukkan. Informasi ini bersifat informatif dan tidak dapat digunakan sebagai pengganti pemeriksaan, diagnosis, atau saran medis dari tenaga kesehatan profesional.</span>
+    </div>
+  </div>
 `;
 
   document.getElementById("placeholderBmiReport").classList.add("d-none");
@@ -113,7 +119,7 @@ function postBMI(e) {
   document
     .getElementById("placeholderBmiRecomendation")
     .classList.add("d-none");
-  document.getElementById("accordionRecomendation").classList.remove("d-none");
+  document.getElementById("contentRecomendation").classList.remove("d-none");
 
   chartBMI(bmi, category);
   renderRecommendation(height, weight, age, gender, category);
