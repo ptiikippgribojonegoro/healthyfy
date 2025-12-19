@@ -472,7 +472,7 @@ function renderRecommendation(height, weight, age, gender, category) {
   const ideal = idealWeightHeight(height, weight, age, gender);
   const life = lifestyleRecommendation(category);
 
-  const items = document.querySelectorAll(".recomendation-item p");
+  const items = document.querySelectorAll(".recomendation-item");
 
   // Ideal Berat/Tinggi
   items[0].innerHTML = `
