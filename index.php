@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <title>Healthyfy | BMI Health Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -23,44 +25,68 @@
       <p>Smart BMI & Healthy Lifestyle Recommendation</p>
     </header>
 
-    <!-- HASIL & GRAFIK -->
-    <div class="grid">
-      <!-- INPUT DATA -->
-      <div class="card">
-        <h2>Data Pengguna</h2>
-
-        <label>Usia</label>
-        <input type="number" id="usia" placeholder="Contoh: 20" />
-
-        <label>Gender</label>
-        <select id="gender">
-          <option value="">-- Pilih Gender --</option>
-          <option value="pria">Pria</option>
-          <option value="wanita">Wanita</option>
-        </select>
-
-        <label>Berat Badan (kg)</label>
-        <input type="number" id="berat" placeholder="Contoh: 65" />
-
-        <label>Tinggi Badan (cm)</label>
-        <input type="number" id="tinggi" placeholder="Contoh: 170" />
-
-        <button onclick="hitungBMI()">
-          <i class="fa-solid fa-calculator"></i>
-          Hitung BMI
-        </button>
-      </div>
-      <div class="card">
-        <h2>Hasil BMI</h2>
-        <div class="hasil">
-          <h3 id="nilaiBMI">0</h3>
-          <span id="kategoriBMI">-</span>
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title m-0">Data Pengguna</h6>
+          </div>
+          <div class="card-body p-0">
+            <form>
+              <div class="row p-3">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group mb-2">
+                    <label class="form-label mb-1 sm">Usia</label>
+                    <input class="form-control" placeholder="00" id="age" type="number">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group mb-2">
+                    <label class="form-label mb-1 sm">Jenis Kelamin</label>
+                    <select class="form-select form-control form-control-sm" id="gender">
+                      <option value="">-- Pilih P/L --</option>
+                      <option value="male">Pria</option>
+                      <option value="female">Wanita</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group mb-2">
+                    <label class="form-label mb-1 sm">Berat <code>(kg)</code></label>
+                    <input class="form-control" placeholder="00" id="weight" type="number">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group mb-2">
+                    <label class="form-label mb-1 sm">Tinggi <code>(cm)</code></label>
+                    <input class="form-control" placeholder="00" id="height" type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-block btn-primary w-100" type="submit">
+                  <i class="fa-solid fa-calculator"></i>
+                  <span>Hitung BMI</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-
-      <div class="card">
-        <h2>Grafik Kategori BMI</h2>
-        <canvas id="bmiChart"></canvas>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <h2>Hasil BMI</h2>
+          <div class="hasil">
+            <h3 id="nilaiBMI">0</h3>
+            <span id="kategoriBMI">-</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <h2>Grafik Kategori BMI</h2>
+          <canvas id="bmiChart"></canvas>
+        </div>
       </div>
     </div>
 
@@ -84,6 +110,9 @@
     <footer>© 2025 Healthyfy</footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
   <script src="script.js?ver=<?= date('ymdhis') ?>"></script>
 </body>
 

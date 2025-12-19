@@ -8,12 +8,6 @@ body {
   background: linear-gradient(135deg, #22c55e, #2563eb);
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 30px;
-}
-
 header {
   text-align: center;
   color: white;
@@ -38,45 +32,6 @@ header p {
   font-size: 20px;
   font-weight: bold;
   margin-top: 0px;
-  ;
-}
-
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
-  margin-bottom: 20px;
-}
-
-label {
-  font-weight: 600;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0 16px;
-  border-radius: 10px;
-  border: 1px solid #cbd5f5;
-}
-
-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: #2563eb;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
 }
 
 .hasil {
@@ -107,4 +62,8 @@ footer {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+.form-label.sm {
+  font-size: 14px;
 }
