@@ -104,10 +104,10 @@ function postBMI(e) {
   <small class="text-gray">
     Rentang kategori: <b>${desc.range}</b>
   </small>
-  <div class="px-3 mt-3">
+  <div class="px-1 mt-3">
     <div class="info-note mb-2 bg-white">
       <span class="info-icon">🧮</span>
-      <span class="info-text text-start">Hasil BMI ini bertujuan memberikan gambaran umum mengenai kondisi berat badan berdasarkan data yang Anda masukkan. Informasi ini bersifat informatif dan tidak dapat digunakan sebagai pengganti pemeriksaan, diagnosis, atau saran medis dari tenaga kesehatan profesional.</span>
+      <span class="info-text text-start">Hasil BMI ini bertujuan memberikan gambaran umum mengenai kondisi berat badan berdasarkan data yang Anda masukkan dan menggunakan standar BMI dewasa (usia 18 tahun ke atas). Informasi ini bersifat informatif dan tidak dapat digunakan sebagai pengganti pemeriksaan, diagnosis, atau saran medis dari tenaga kesehatan profesional.</span>
     </div>
   </div>
 `;
@@ -270,7 +270,7 @@ function idealWeightHeight(heightCm, weightKg, age, gender) {
     heightRange: `${minHeight.toFixed(0)} – ${maxHeight.toFixed(0)} cm`,
     note:
       age < 18
-        ? "Catatan: BMI dewasa kurang akurat untuk usia di bawah 18 tahun."
+        ? "Catatan: Untuk usia di bawah 18 tahun, hasil perhitungan ini bersifat indikatif karena masih menggunakan standar BMI dewasa. Pada usia anak dan remaja, pertumbuhan tubuh masih berlangsung sehingga penilaian status berat badan sebaiknya dilakukan menggunakan standar khusus dan dikonsultasikan dengan tenaga kesehatan profesional."
         : null,
   };
 }
@@ -528,7 +528,9 @@ function renderRecommendation(height, weight, age, gender, category) {
     ✓ Berat ideal Anda: <b>${ideal.weightRange}</b><br/>
     ✓ Tinggi ideal dari berat saat ini: <b>${ideal.heightRange}</b>
     ${
-      ideal.note ? `<br/><small class="text-warning">${ideal.note}</small>` : ""
+      ideal.note
+        ? `<p class="m-0 mt-2"><small class="text-danger">${ideal.note}</small></p>`
+        : ""
     }
   `;
 
