@@ -113,6 +113,10 @@
           </div>
           <div class="card-body">
             <div class="recomendation-item border-bottom pb-2 mb-3">
+              <h6>🏃 Ideal Berat/Tinggi</h6>
+              <p></p>
+            </div>
+            <div class="recomendation-item border-bottom pb-2 mb-3">
               <h6>🏃 Aktivitas Fisik</h6>
               <p></p>
             </div>

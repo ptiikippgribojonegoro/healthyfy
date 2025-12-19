@@ -13,10 +13,10 @@ function calBMI(weight, heightCm) {
    KATEGORI BMI
 ====================== */
 function getCategoryBMI(bmi) {
-  if (bmi < 18.5) return "Kurus";
-  if (bmi < 25) return "Normal";
-  if (bmi < 30) return "Overweight";
-  return "Obesitas";
+  if (bmi < 18.5) return "kurus";
+  if (bmi < 25) return "normal";
+  if (bmi < 30) return "overweight";
+  return "obesitas";
 }
 
 /* ======================
@@ -24,13 +24,13 @@ function getCategoryBMI(bmi) {
 ====================== */
 function categoryColor(category) {
   switch (category) {
-    case "Kurus":
+    case "kurus":
       return "primary";
-    case "Normal":
+    case "normal":
       return "success";
-    case "Overweight":
+    case "overweight":
       return "warning";
-    case "Obesitas":
+    case "obesitas":
       return "danger";
     default:
       return "secondary";
@@ -39,22 +39,22 @@ function categoryColor(category) {
 
 function bmiDescription(category) {
   const data = {
-    Kurus: {
+    kurus: {
       icon: "🟦",
       text: "Berat badan Anda berada di bawah rentang ideal.",
       range: "< 18.5",
     },
-    Normal: {
+    normal: {
       icon: "🟢",
       text: "Berat badan Anda berada dalam rentang ideal.",
       range: "18.5 – 24.9",
     },
-    Overweight: {
+    overweight: {
       icon: "🟡",
       text: "Berat badan Anda sedikit di atas rentang ideal.",
       range: "25 – 29.9",
     },
-    Obesitas: {
+    obesitas: {
       icon: "🔴",
       text: "Berat badan Anda jauh di atas rentang ideal.",
       range: "≥ 30",
@@ -112,6 +112,7 @@ function postBMI(e) {
   document.getElementById("bmiChartWrapper").classList.remove("d-none");
 
   chartBMI(category);
+  renderRecommendation(height, weight, age, gender, category);
 }
 
 /* ======================
@@ -185,4 +186,91 @@ function chartBMI(kategori) {
     },
     plugins: [ChartDataLabels],
   });
+}
+
+function idealWeightHeight(heightCm, weightKg, age, gender) {
+  const heightM = heightCm / 100;
+
+  let bmiMin = 18.5;
+  let bmiMax = 24.9;
+
+  // Adjust usia
+  let weightTolerance = 0;
+  if (age > 40) weightTolerance += 1.5;
+
+  // Adjust gender
+  if (gender === "male") weightTolerance += 1;
+
+  // Berat ideal dari tinggi
+  let minWeight = bmiMin * (heightM * heightM);
+  let maxWeight = bmiMax * (heightM * heightM);
+
+  minWeight = (minWeight - weightTolerance).toFixed(1);
+  maxWeight = (maxWeight + weightTolerance).toFixed(1);
+
+  // Tinggi ideal dari berat
+  let minHeight = Math.sqrt(weightKg / bmiMax) * 100;
+  let maxHeight = Math.sqrt(weightKg / bmiMin) * 100;
+
+  return {
+    weightRange: `${minWeight} – ${maxWeight} kg`,
+    heightRange: `${minHeight.toFixed(0)} – ${maxHeight.toFixed(0)} cm`,
+    note:
+      age < 18
+        ? "Catatan: BMI dewasa kurang akurat untuk usia di bawah 18 tahun."
+        : null,
+  };
+}
+
+function lifestyleRecommendation(category) {
+  const data = {
+    kurus: {
+      activity:
+        "Latihan kekuatan ringan 2–3x/minggu untuk meningkatkan massa otot.",
+      diet: "Tingkatkan asupan protein, karbohidrat kompleks, dan lemak sehat.",
+      lifestyle: "Tidur cukup dan hindari melewatkan waktu makan.",
+    },
+    normal: {
+      activity: "Kombinasi cardio dan strength training 3–4x/minggu.",
+      diet: "Pertahankan pola makan seimbang dengan gizi lengkap.",
+      lifestyle: "Kelola stres dan pertahankan rutinitas sehat.",
+    },
+    overweight: {
+      activity: "Cardio intensitas sedang 30 menit/hari + latihan ringan.",
+      diet: "Kurangi gula, gorengan, dan perbanyak serat.",
+      lifestyle: "Atur jam makan dan tingkatkan aktivitas harian.",
+    },
+    obesitas: {
+      activity: "Aktivitas low-impact seperti jalan kaki & berenang.",
+      diet: "Fokus defisit kalori sehat dan konsultasi profesional.",
+      lifestyle: "Bangun kebiasaan kecil yang konsisten.",
+    },
+  };
+
+  return data[category];
+}
+
+function renderRecommendation(height, weight, age, gender, category) {
+  const ideal = idealWeightHeight(height, weight, age, gender);
+  const life = lifestyleRecommendation(category);
+
+  const items = document.querySelectorAll(".recomendation-item p");
+
+  // Ideal Berat/Tinggi
+  items[0].innerHTML = `
+    Berat ideal Anda: <b>${ideal.weightRange}</b><br/>
+    Tinggi ideal dari berat saat ini: <b>${ideal.heightRange}</b>
+    ${
+      ideal.note ? `<br/><small class="text-warning">${ideal.note}</small>` : ""
+    }
+  `;
+
+  // Aktivitas
+  items[1].innerHTML = life.activity;
+
+  // Pola makan
+  items[2].innerHTML = life.diet;
+
+  // Gaya hidup
+  items[3].innerHTML = life.lifestyle;
 }
