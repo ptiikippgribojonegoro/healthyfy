@@ -115,32 +115,72 @@ function postBMI(e) {
     .classList.add("d-none");
   document.getElementById("accordionRecomendation").classList.remove("d-none");
 
-  chartBMI(category);
+  chartBMI(bmi, category);
   renderRecommendation(height, weight, age, gender, category);
 }
 
 /* ======================
    PIE CHART BMI
 ====================== */
-function chartBMI(kategori) {
-  const ctx = document.getElementById("bmiChart");
 
-  // Proporsi edukatif kategori BMI
-  const dataKategori = {
-    Kurus: 18.5,
-    Normal: 24.9,
-    Overweight: 29.9,
-    Obesitas: 40,
+const bmiRanges = {
+  kurus: { min: 0, max: 18.5 },
+  normal: { min: 18.5, max: 24.9 },
+  overweight: { min: 24.9, max: 29.9 },
+  obesitas: { min: 29.9, max: 40 },
+};
+
+function generatePieDataByBMI(bmi, category) {
+  const weights = {
+    kurus: 5,
+    normal: 5,
+    overweight: 5,
+    obesitas: 5,
   };
 
-  const labels = Object.keys(dataKategori);
-  const values = Object.values(dataKategori);
+  const active = bmiRanges[category];
+  const rangeSize = active.max - active.min;
+
+  // posisi BMI dalam kategorinya (0–1)
+  const position = Math.min(Math.max((bmi - active.min) / rangeSize, 0), 1);
+
+  // bobot kategori utama
+  weights[category] = 60;
+
+  // kategori sebelum & sesudah
+  const keys = Object.keys(bmiRanges);
+  const index = keys.indexOf(category);
+
+  if (index > 0) {
+    weights[keys[index - 1]] += (1 - position) * 25;
+  }
+
+  if (index < keys.length - 1) {
+    weights[keys[index + 1]] += position * 25;
+  }
+
+  // normalisasi ke 100
+  const total = Object.values(weights).reduce((a, b) => a + b, 0);
+  Object.keys(weights).forEach(
+    (k) => (weights[k] = +((weights[k] / total) * 100).toFixed(1))
+  );
+
+  return weights;
+}
+
+function chartBMI(bmi, category) {
+  const ctx = document.getElementById("bmiChart");
+
+  const datasetCategory = generatePieDataByBMI(Number(bmi), category);
+
+  const labels = Object.keys(datasetCategory);
+  const values = Object.values(datasetCategory);
 
   const colors = {
-    Kurus: "#90CAF9",
-    Normal: "#A5D6A7",
-    Overweight: "#FFE082",
-    Obesitas: "#EF9A9A",
+    kurus: "#90CAF9",
+    normal: "#A5D6A7",
+    overweight: "#FFE082",
+    obesitas: "#EF9A9A",
   };
 
   if (bmiChart) bmiChart.destroy();
@@ -148,14 +188,14 @@ function chartBMI(kategori) {
   bmiChart = new Chart(ctx, {
     type: "pie",
     data: {
-      labels: labels,
+      labels,
       datasets: [
         {
           data: values,
           backgroundColor: labels.map((l) => colors[l]),
-          borderWidth: labels.map((l) => (l === kategori ? 4 : 1)),
+          borderWidth: labels.map((l) => (l === category ? 4 : 1)),
           borderColor: labels.map((l) =>
-            l === kategori ? "#2E7D32" : "#ffffff"
+            l === category ? "#2E7D32" : "#ffffff"
           ),
         },
       ],
@@ -163,10 +203,17 @@ function chartBMI(kategori) {
     options: {
       responsive: true,
       plugins: {
-        tooltip: { enabled: false },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function (ctx) {
+              return `${ctx.label}: ${ctx.parsed}%`;
+            },
+          },
+        },
         legend: {
-          display: false,
-          position: "bottom",
+          display: true,
+          position: "right",
           labels: {
             usePointStyle: true,
           },
@@ -177,17 +224,11 @@ function chartBMI(kategori) {
             weight: "bold",
             size: 12,
           },
-          formatter: (value, ctx) => {
-            const total = ctx.chart.data.datasets[0].data.reduce(
-              (a, b) => a + b,
-              0
-            );
-            const percent = ((value / total) * 100).toFixed(1);
-            return `${ctx.chart.data.labels[ctx.dataIndex]}\n${percent}%`;
-          },
+          formatter: (value) => `${value}%`,
         },
       },
     },
+
     plugins: [ChartDataLabels],
   });
 }
