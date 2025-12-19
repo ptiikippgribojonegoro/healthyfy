@@ -11,18 +11,15 @@ body {
 header {
   text-align: center;
   color: white;
-  margin-bottom: 25px;
 }
 
 .logo {
   width: 100px;
-  margin-bottom: 5px;
   background: #95f3cc;
   border-radius: 80px;
 }
 
 header h1 {
-  margin: 5px 0;
   font-size: 36px;
   text-transform: uppercase;
   letter-spacing: .5px;

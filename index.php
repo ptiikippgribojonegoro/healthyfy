@@ -19,8 +19,8 @@
 
 <body>
   <div class="container">
-    <header>
-      <img src="logo.png" alt="Healthyfy Logo" class="logo" />
+    <header class="py-3">
+      <img src="logo.png" alt="Healthyfy Logo" class="logo mb-2" />
       <h1>Healthyfy</h1>
       <p>Smart BMI & Healthy Lifestyle Recommendation</p>
     </header>
