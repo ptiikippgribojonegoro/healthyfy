@@ -26,7 +26,7 @@
     </header>
 
     <div class="row">
-      <div class="col-12 col-lg-4">
+      <div class="col-12 col-lg-4 mb-2">
         <div class="card">
           <div class="card-header">
             <h6 class="card-title m-0">Data Pengguna</h6>
@@ -73,41 +73,61 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <h2>Hasil BMI</h2>
-          <div class="hasil">
-            <h3 id="nilaiBMI">0</h3>
-            <span id="kategoriBMI">-</span>
+      <div class="col-12 col-lg-4 mb-2">
+        <div class="card h-100">
+          <div class="card-header">
+            <h6 class="card-title m-0">Hasil BMI</h6>
+          </div>
+          <div class="card-body p-0 d-flex align-items-center justify-content-center">
+            <div class="hasil">
+              <h3 id="nilaiBMI">0</h3>
+              <span id="kategoriBMI">-</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <h2>Grafik Kategori BMI</h2>
-          <canvas id="bmiChart"></canvas>
+      <div class="col-12 col-lg-4 mb-2">
+        <div class="card h-100">
+          <div class="card-header">
+            <h6 class="card-title m-0">Grafil BMI</h6>
+          </div>
+          <div class="card-body p-0 d-flex align-items-center justify-content-center">
+            <canvas id="bmiChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-12 mb-2 mt-3">
+        <div class="card h-100">
+          <div class="card-header">
+            <h5 class="card-title m-0"><i class="fa-solid fa-heart-circle-check text-danger"></i><span
+                class="ms-2">Rekomendasi
+                Personal</span></h5>
+          </div>
+          <div class="card-body">
+            <div class="recomendation-item border-bottom pb-2 mb-3">
+              <h6>🏃 Aktivitas Fisik</h6>
+              <p></p>
+            </div>
+            <div class="recomendation-item border-bottom pb-2 mb-3">
+              <h6>🥗 Pola Makan</h6>
+              <p></p>
+            </div>
+            <div class="recomendation-item pb-2">
+              <h6>🌿 Tips Gaya Hidup</h6>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- REKOMENDASI -->
-    <div class="card rekomendasi">
-      <h2>
-        <i class="fa-solid fa-heart-circle-check"></i>
-        Rekomendasi Personal
-      </h2>
-
-      <h3>🏃 Aktivitas Fisik</h3>
-      <ul id="aktivitas"></ul>
-
-      <h3>🥗 Pola Makan</h3>
-      <ul id="makanan"></ul>
-
-      <h3>🌿 Tips Gaya Hidup</h3>
-      <ul id="gayahidup"></ul>
-    </div>
-
-    <footer>© 2025 Healthyfy</footer>
+    <footer class="pb-3">
+      <div class="text-center">
+        <p class="m-0">© <?= date('Y') ?> Healthyfy</p>
+        <p class="m-0">Pendidikan Teknologi Informasi</p>
+        <p class="m-0">IKIP PGRI Bojonegoro</p>
+      </div>
+    </footer>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
