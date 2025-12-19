@@ -26,7 +26,8 @@
       <div class="col-12 col-lg-4 mb-2">
         <div class="card">
           <div class="card-header">
-            <h6 class="card-title m-0">Data Pengguna</h6>
+            <h6 class="card-title m-0"><i class="fa-solid fa-user text-primary"></i><span class="ms-2">Data
+                Pengguna</span></h6>
           </div>
           <div class="card-body p-0">
             <form onsubmit="postBMI(event)">
@@ -73,7 +74,8 @@
       <div class="col-12 col-lg-4 mb-2">
         <div class="card h-100">
           <div class="card-header">
-            <h6 class="card-title m-0">Hasil BMI</h6>
+            <h6 class="card-title m-0"><i class="fa-solid fa-calculator text-success"></i><span class="ms-2">Hasil
+                BMI</span></h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
             <div id="placeholderBmiReport" class="resultPlaceholder text-center">
@@ -89,7 +91,8 @@
       <div class="col-12 col-lg-4 mb-2">
         <div class="card h-100">
           <div class="card-header">
-            <h6 class="card-title m-0">Grafil BMI</h6>
+            <h6 class="card-title m-0"><i class="fa-solid fa-pie-chart text-info"></i><span class="ms-2">Grafik
+                BMI</span></h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
             <div id="placeholderBmiChart" class="resultPlaceholder text-center">
@@ -112,21 +115,61 @@
                 Personal</span></h5>
           </div>
           <div class="card-body">
-            <div class="recomendation-item border-bottom pb-2 mb-3">
-              <h6>🎯 Berat & Tinggi Ideal</h6>
-              <p></p>
+            <div id="placeholderBmiRecomendation" class="resultPlaceholder text-center">
+              <div class="icon">🎯🏃🥗🌿</div>
+              <p class="text-muted">
+                Rekomendasi personal dari hasil BMI akan tampil di sini
+              </p>
             </div>
-            <div class="recomendation-item border-bottom pb-2 mb-3">
-              <h6>🏃 Aktivitas Fisik</h6>
-              <p></p>
-            </div>
-            <div class="recomendation-item border-bottom pb-2 mb-3">
-              <h6>🥗 Pola Makan</h6>
-              <p></p>
-            </div>
-            <div class="recomendation-item pb-2">
-              <h6>🌿 Tips Gaya Hidup</h6>
-              <p></p>
+            <div class="accordion d-none" id="accordionRecomendation">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    🎯 Berat & Tinggi Ideal
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionRecomendation">
+                  <div class="accordion-body recomendation-item"></div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    🏃 Aktivitas Fisik
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionRecomendation">
+                  <div class="accordion-body recomendation-item"></div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    🥗 Pola Makan
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                  data-bs-parent="#accordionRecomendation">
+                  <div class="accordion-body recomendation-item"></div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    🌿 Tips Gaya Hidup
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                  data-bs-parent="#accordionRecomendation">
+                  <div class="accordion-body recomendation-item"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

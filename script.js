@@ -110,6 +110,10 @@ function postBMI(e) {
   document.getElementById("bmiReport").classList.remove("d-none");
   document.getElementById("placeholderBmiChart").classList.add("d-none");
   document.getElementById("bmiChartWrapper").classList.remove("d-none");
+  document
+    .getElementById("placeholderBmiRecomendation")
+    .classList.add("d-none");
+  document.getElementById("accordionRecomendation").classList.remove("d-none");
 
   chartBMI(category);
   renderRecommendation(height, weight, age, gender, category);
