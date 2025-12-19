@@ -13,7 +13,7 @@ function calBMI(weight, heightCm) {
    KATEGORI BMI
 ====================== */
 function getCategoryBMI(bmi) {
-  if (bmi < 18.5) return "kurus";
+  if (bmi < 18.5) return "underweight";
   if (bmi < 25) return "normal";
   if (bmi < 30) return "overweight";
   return "obesitas";
@@ -24,7 +24,7 @@ function getCategoryBMI(bmi) {
 ====================== */
 function categoryColor(category) {
   switch (category) {
-    case "kurus":
+    case "underweight":
       return "primary";
     case "normal":
       return "success";
@@ -39,7 +39,7 @@ function categoryColor(category) {
 
 function bmiDescription(category) {
   const data = {
-    kurus: {
+    underweight: {
       icon: "🟦",
       text: "Berat badan Anda berada di bawah rentang ideal.",
       range: "< 18.5",
@@ -124,7 +124,7 @@ function postBMI(e) {
 ====================== */
 
 const bmiRanges = {
-  kurus: { min: 0, max: 18.5 },
+  underweight: { min: 0, max: 18.5 },
   normal: { min: 18.5, max: 24.9 },
   overweight: { min: 24.9, max: 29.9 },
   obesitas: { min: 29.9, max: 40 },
@@ -132,7 +132,7 @@ const bmiRanges = {
 
 function generatePieDataByBMI(bmi, category) {
   const weights = {
-    kurus: 5,
+    underweight: 5,
     normal: 5,
     overweight: 5,
     obesitas: 5,
@@ -173,11 +173,13 @@ function chartBMI(bmi, category) {
 
   const datasetCategory = generatePieDataByBMI(Number(bmi), category);
 
-  const labels = Object.keys(datasetCategory);
+  const rawLabels = Object.keys(datasetCategory);
+
+  const labels = rawLabels.map((l) => l.charAt(0).toUpperCase() + l.slice(1));
   const values = Object.values(datasetCategory);
 
   const colors = {
-    kurus: "#90CAF9",
+    underweight: "#90CAF9",
     normal: "#A5D6A7",
     overweight: "#FFE082",
     obesitas: "#EF9A9A",
@@ -192,9 +194,9 @@ function chartBMI(bmi, category) {
       datasets: [
         {
           data: values,
-          backgroundColor: labels.map((l) => colors[l]),
-          borderWidth: labels.map((l) => (l === category ? 4 : 1)),
-          borderColor: labels.map((l) =>
+          backgroundColor: rawLabels.map((l) => colors[l]),
+          borderWidth: rawLabels.map((l) => (l === category ? 4 : 1)),
+          borderColor: rawLabels.map((l) =>
             l === category ? "#2E7D32" : "#ffffff"
           ),
         },
@@ -207,13 +209,13 @@ function chartBMI(bmi, category) {
           enabled: true,
           callbacks: {
             label: function (ctx) {
-              return `${ctx.label}: ${ctx.parsed}%`;
+              return ` ${ctx.parsed}%`;
             },
           },
         },
         legend: {
           display: true,
-          position: "right",
+          position: "bottom",
           labels: {
             usePointStyle: true,
           },
@@ -269,7 +271,7 @@ function idealWeightHeight(heightCm, weightKg, age, gender) {
 
 function lifestyleRecommendation(category) {
   const data = {
-    kurus: {
+    underweight: {
       activity: [
         {
           title: "Latihan Kekuatan Ringan",
