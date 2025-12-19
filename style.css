@@ -70,3 +70,16 @@ footer {
   height: 220px;
   margin: 0 auto;
 }
+
+.resultPlaceholder .icon {
+  font-size: 36px;
+}
+
+.resultPlaceholder .text-muted {
+  color: #777;
+  font-size: 14px;
+}
+
+#bmiReport p {
+  font-size: 13px;
+}

@@ -25,16 +25,42 @@ function getCategoryBMI(bmi) {
 function categoryColor(category) {
   switch (category) {
     case "Kurus":
-      return "bg-primary";
+      return "primary";
     case "Normal":
-      return "bg-success";
+      return "success";
     case "Overweight":
-      return "bg-warning";
+      return "warning";
     case "Obesitas":
-      return "bg-danger";
+      return "danger";
     default:
-      return "bg-secondary";
+      return "secondary";
   }
+}
+
+function bmiDescription(category) {
+  const data = {
+    Kurus: {
+      icon: "🟦",
+      text: "Berat badan Anda berada di bawah rentang ideal.",
+      range: "< 18.5",
+    },
+    Normal: {
+      icon: "🟢",
+      text: "Berat badan Anda berada dalam rentang ideal.",
+      range: "18.5 – 24.9",
+    },
+    Overweight: {
+      icon: "🟡",
+      text: "Berat badan Anda sedikit di atas rentang ideal.",
+      range: "25 – 29.9",
+    },
+    Obesitas: {
+      icon: "🔴",
+      text: "Berat badan Anda jauh di atas rentang ideal.",
+      range: "≥ 30",
+    },
+  };
+  return data[category];
 }
 
 /* ======================
@@ -56,16 +82,34 @@ function postBMI(e) {
 
   const bmi = calBMI(weight, height);
   const category = getCategoryBMI(bmi);
-  const badgeColor = categoryColor(category);
+  const color = categoryColor(category);
+
+  const desc = bmiDescription(category);
 
   document.getElementById("bmiReport").innerHTML = `
+  <div class="mb-2">
     <h1 id="bmiValue">${bmi}</h1>
-    <h3>
-      <span id="bmiCategory" class="badge ${badgeColor} text-uppercase">
-        ${category}
-      </span>
-    </h3>
-  `;
+  </div>
+
+  <h3>
+    <span id="bmiCategory" class="badge badge-light text-${color} text-uppercase">
+      ${desc.icon} ${category}
+    </span>
+  </h3>
+
+  <p class="mt-2 mb-0">
+    ${desc.text}
+  </p>
+
+  <small class="text-muted">
+    Rentang kategori: <b>${desc.range}</b>
+  </small>
+`;
+
+  document.getElementById("placeholderBmiReport").classList.add("d-none");
+  document.getElementById("bmiReport").classList.remove("d-none");
+  document.getElementById("placeholderBmiChart").classList.add("d-none");
+  document.getElementById("bmiChartWrapper").classList.remove("d-none");
 
   chartBMI(category);
 }

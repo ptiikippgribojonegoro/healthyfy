@@ -76,7 +76,13 @@
             <h6 class="card-title m-0">Hasil BMI</h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
-            <div id="bmiReport" class="text-center"></div>
+            <div id="placeholderBmiReport" class="resultPlaceholder text-center">
+              <div class="icon">🧮</div>
+              <p class="text-muted">
+                Hasil perhitungan BMI akan tampil di sini
+              </p>
+            </div>
+            <div id="bmiReport" class="text-center d-none"></div>
           </div>
         </div>
       </div>
@@ -86,7 +92,13 @@
             <h6 class="card-title m-0">Grafil BMI</h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
-            <div class="chart-wrapper">
+            <div id="placeholderBmiChart" class="resultPlaceholder text-center">
+              <div class="icon">📊</div>
+              <p class="text-muted">
+                Grafik perhitungan BMI akan tampil di sini
+              </p>
+            </div>
+            <div id="bmiChartWrapper" class="chart-wrapper d-none">
               <canvas id="bmiChart"></canvas>
             </div>
           </div>
