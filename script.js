@@ -225,25 +225,239 @@ function idealWeightHeight(heightCm, weightKg, age, gender) {
 function lifestyleRecommendation(category) {
   const data = {
     kurus: {
-      activity:
-        "Latihan kekuatan ringan 2–3x/minggu untuk meningkatkan massa otot.",
-      diet: "Tingkatkan asupan protein, karbohidrat kompleks, dan lemak sehat.",
-      lifestyle: "Tidur cukup dan hindari melewatkan waktu makan.",
+      activity: [
+        {
+          title: "Latihan Kekuatan Ringan",
+          tips: [
+            "Lakukan latihan beban ringan 2–3 kali per minggu",
+            "Fokus pada gerakan dasar seperti squat, push-up, dan plank",
+            "Tingkatkan beban secara bertahap sesuai kemampuan tubuh",
+          ],
+        },
+        {
+          title: "Aktivitas Fisik Harian",
+          tips: [
+            "Tetap aktif dengan berjalan kaki atau peregangan ringan",
+            "Hindari aktivitas fisik berlebihan yang membakar terlalu banyak kalori",
+            "Utamakan aktivitas yang membangun kekuatan, bukan hanya cardio",
+          ],
+        },
+        {
+          title: "Pemulihan Tubuh",
+          tips: [
+            "Berikan waktu istirahat yang cukup setelah berolahraga",
+            "Hindari olahraga berat setiap hari tanpa jeda",
+            "Dengarkan sinyal lelah dari tubuh",
+          ],
+        },
+      ],
+      diet: [
+        {
+          title: "Peningkatan Asupan Kalori Sehat",
+          tips: [
+            "Tambahkan porsi makan secara bertahap",
+            "Pilih makanan padat nutrisi, bukan sekadar tinggi kalori",
+            "Hindari mengganti makan utama dengan camilan saja",
+          ],
+        },
+        {
+          title: "Asupan Protein",
+          tips: [
+            "Konsumsi protein dari telur, ikan, ayam, tahu, atau tempe",
+            "Sertakan protein di setiap waktu makan",
+            "Protein membantu pembentukan massa otot",
+          ],
+        },
+        {
+          title: "Pola Makan Teratur",
+          tips: [
+            "Makan 3 kali sehari dengan camilan sehat di antaranya",
+            "Jangan melewatkan sarapan",
+            "Buat jadwal makan yang konsisten",
+          ],
+        },
+      ],
+      lifestyle: [
+        {
+          title: "Kualitas Tidur",
+          tips: [
+            "Tidur 7–9 jam setiap malam",
+            "Tidur dan bangun di jam yang sama setiap hari",
+            "Hindari begadang yang tidak perlu",
+          ],
+        },
+        {
+          title: "Manajemen Stres",
+          tips: [
+            "Kelola stres dengan aktivitas relaksasi",
+            "Hindari tekanan berlebih pada tubuh",
+            "Luangkan waktu untuk istirahat mental",
+          ],
+        },
+      ],
     },
+
     normal: {
-      activity: "Kombinasi cardio dan strength training 3–4x/minggu.",
-      diet: "Pertahankan pola makan seimbang dengan gizi lengkap.",
-      lifestyle: "Kelola stres dan pertahankan rutinitas sehat.",
+      activity: [
+        {
+          title: "Olahraga Seimbang",
+          tips: [
+            "Kombinasikan latihan kekuatan dan cardio",
+            "Berolahraga 3–4 kali per minggu",
+            "Variasikan jenis olahraga agar tidak bosan",
+          ],
+        },
+        {
+          title: "Aktivitas Harian Aktif",
+          tips: [
+            "Kurangi duduk terlalu lama",
+            "Gunakan tangga dibanding lift",
+            "Tetap bergerak di sela aktivitas",
+          ],
+        },
+        {
+          title: "Pencegahan Cedera",
+          tips: [
+            "Lakukan pemanasan sebelum olahraga",
+            "Pendinginan setelah latihan",
+            "Gunakan teknik yang benar",
+          ],
+        },
+      ],
+      diet: [
+        {
+          title: "Pola Makan Seimbang",
+          tips: [
+            "Penuhi karbohidrat, protein, lemak, vitamin, dan mineral",
+            "Perbanyak sayur dan buah",
+            "Batasi makanan tinggi gula dan lemak jenuh",
+          ],
+        },
+        {
+          title: "Kontrol Porsi",
+          tips: [
+            "Makan secukupnya sesuai kebutuhan",
+            "Hindari makan berlebihan meski makanan sehat",
+            "Perhatikan rasa kenyang",
+          ],
+        },
+      ],
+      lifestyle: [
+        {
+          title: "Menjaga Konsistensi",
+          tips: [
+            "Pertahankan kebiasaan sehat yang sudah baik",
+            "Jangan lengah meski berat badan normal",
+            "Pantau berat badan secara berkala",
+          ],
+        },
+      ],
     },
+
     overweight: {
-      activity: "Cardio intensitas sedang 30 menit/hari + latihan ringan.",
-      diet: "Kurangi gula, gorengan, dan perbanyak serat.",
-      lifestyle: "Atur jam makan dan tingkatkan aktivitas harian.",
+      activity: [
+        {
+          title: "Cardio Intensitas Sedang",
+          tips: [
+            "Lakukan jalan cepat, bersepeda, atau berenang",
+            "Durasi minimal 30 menit per hari",
+            "Lakukan secara konsisten",
+          ],
+        },
+        {
+          title: "Latihan Kekuatan",
+          tips: [
+            "Latihan otot 2–3 kali per minggu",
+            "Gunakan berat tubuh sebagai awal",
+            "Latihan membantu meningkatkan metabolisme",
+          ],
+        },
+        {
+          title: "Aktivitas Fisik Bertahap",
+          tips: [
+            "Mulai dari intensitas ringan",
+            "Tingkatkan perlahan sesuai kemampuan",
+            "Hindari olahraga ekstrem mendadak",
+          ],
+        },
+      ],
+      diet: [
+        {
+          title: "Pengaturan Asupan Kalori",
+          tips: [
+            "Kurangi makanan tinggi gula dan lemak",
+            "Batasi minuman manis",
+            "Perhatikan ukuran porsi",
+          ],
+        },
+        {
+          title: "Peningkatan Serat",
+          tips: [
+            "Perbanyak sayur, buah, dan biji-bijian",
+            "Serat membantu rasa kenyang lebih lama",
+            "Baik untuk pencernaan",
+          ],
+        },
+      ],
+      lifestyle: [
+        {
+          title: "Perubahan Kebiasaan",
+          tips: [
+            "Atur jam makan secara teratur",
+            "Kurangi kebiasaan ngemil malam",
+            "Tidur cukup dan berkualitas",
+          ],
+        },
+      ],
     },
+
     obesitas: {
-      activity: "Aktivitas low-impact seperti jalan kaki & berenang.",
-      diet: "Fokus defisit kalori sehat dan konsultasi profesional.",
-      lifestyle: "Bangun kebiasaan kecil yang konsisten.",
+      activity: [
+        {
+          title: "Aktivitas Fisik Aman",
+          tips: [
+            "Mulai dengan jalan kaki atau berenang",
+            "Pilih aktivitas low-impact",
+            "Hindari olahraga yang memberi tekanan berlebih pada sendi",
+          ],
+        },
+        {
+          title: "Peningkatan Bertahap",
+          tips: [
+            "Tambah durasi dan intensitas secara perlahan",
+            "Fokus pada konsistensi, bukan kecepatan hasil",
+            "Jangan memaksakan diri",
+          ],
+        },
+      ],
+      diet: [
+        {
+          title: "Pengurangan Kalori Sehat",
+          tips: [
+            "Kurangi makanan tinggi kalori dan rendah nutrisi",
+            "Utamakan makanan segar dan alami",
+            "Hindari diet ekstrem",
+          ],
+        },
+        {
+          title: "Pendampingan Profesional",
+          tips: [
+            "Pertimbangkan konsultasi dengan tenaga kesehatan",
+            "Ikuti rencana makan yang aman",
+            "Pantau progres secara berkala",
+          ],
+        },
+      ],
+      lifestyle: [
+        {
+          title: "Pembentukan Kebiasaan Sehat",
+          tips: [
+            "Mulai dari perubahan kecil",
+            "Tetapkan target yang realistis",
+            "Bangun rutinitas yang bisa dipertahankan jangka panjang",
+          ],
+        },
+      ],
     },
   };
 
@@ -258,19 +472,34 @@ function renderRecommendation(height, weight, age, gender, category) {
 
   // Ideal Berat/Tinggi
   items[0].innerHTML = `
-    Berat ideal Anda: <b>${ideal.weightRange}</b><br/>
-    Tinggi ideal dari berat saat ini: <b>${ideal.heightRange}</b>
+    ✓ Berat ideal Anda: <b>${ideal.weightRange}</b><br/>
+    ✓ Tinggi ideal dari berat saat ini: <b>${ideal.heightRange}</b>
     ${
       ideal.note ? `<br/><small class="text-warning">${ideal.note}</small>` : ""
     }
   `;
 
   // Aktivitas
-  items[1].innerHTML = life.activity;
+  items[1].innerHTML = renderLifeSection(life.activity);
 
   // Pola makan
-  items[2].innerHTML = life.diet;
+  items[2].innerHTML = renderLifeSection(life.diet);
 
   // Gaya hidup
-  items[3].innerHTML = life.lifestyle;
+  items[3].innerHTML = renderLifeSection(life.lifestyle);
+}
+
+function renderLifeSection(section) {
+  return section
+    .map(
+      (item) => `
+    <div class="mb-3">
+      <strong>${item.title}</strong>
+      <ul class="mb-0 ps-3">
+        ${item.tips.map((tip) => `<li>${tip}</li>`).join("")}
+      </ul>
+    </div>
+  `
+    )
+    .join("");
 }
