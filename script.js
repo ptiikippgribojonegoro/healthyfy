@@ -1,5 +1,40 @@
 let chart;
 
+function calBMI(weight, heightCm) {
+  let heightM = heightCm / 100;
+  let bmi = weight / (heightM * heightM);
+  return bmi.toFixed(1);
+}
+
+function getCategoryBMI(bmi) {
+  if (bmi < 18.5) {
+    return "Kurus";
+  } else if (bmi < 25) {
+    return "Normal";
+  } else if (bmi < 30) {
+    return "Overweight";
+  } else {
+    return "Obesitas";
+  }
+}
+
+function postBMI(e) {
+  e.preventDefault();
+
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const weight = document.getElementById("weight").value;
+  const height = document.getElementById("height").value;
+
+  let bmi = calBMI(weight, height);
+  let category = getCategoryBMI(bmi);
+
+  document.getElementById("bmiReport").innerHTML = `
+  <h1 id="bmiValue">${bmi}</h1>
+  <h3><span id="bmiCategory" class="badge bg-danger badge-pill text-uppercase">${category}</span></h3>
+  `;
+}
+
 function hitungBMI() {
   const usia = document.getElementById("usia").value;
   const gender = document.getElementById("gender").value;

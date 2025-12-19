@@ -32,34 +32,34 @@
             <h6 class="card-title m-0">Data Pengguna</h6>
           </div>
           <div class="card-body p-0">
-            <form>
+            <form onsubmit="postBMI(event)">
               <div class="row p-3">
                 <div class="col-12 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Usia</label>
-                    <input class="form-control" placeholder="00" id="age" type="number">
+                    <input class="form-control" required placeholder="00" id="age" type="number">
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Jenis Kelamin</label>
-                    <select class="form-select form-control form-control-sm" id="gender">
+                    <select required class="form-select form-control form-control-sm" id="gender">
                       <option value="">-- Pilih P/L --</option>
-                      <option value="male">Pria</option>
-                      <option value="female">Wanita</option>
+                      <option value="male">Laki-Laki</option>
+                      <option value="female">Perempuan</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Berat <code>(kg)</code></label>
-                    <input class="form-control" placeholder="00" id="weight" type="number">
+                    <input required class="form-control" placeholder="00" id="weight" type="number">
                   </div>
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Tinggi <code>(cm)</code></label>
-                    <input class="form-control" placeholder="00" id="height" type="number">
+                    <input required class="form-control" placeholder="00" id="height" type="number">
                   </div>
                 </div>
               </div>
@@ -79,10 +79,7 @@
             <h6 class="card-title m-0">Hasil BMI</h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
-            <div class="hasil">
-              <h3 id="nilaiBMI">0</h3>
-              <span id="kategoriBMI">-</span>
-            </div>
+            <div id="bmiReport" class="text-center"></div>
           </div>
         </div>
       </div>
