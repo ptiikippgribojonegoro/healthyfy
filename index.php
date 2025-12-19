@@ -11,9 +11,6 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <link rel="stylesheet" href="style.css?ver=<?= date('ymdhis') ?>" />
 </head>
 
@@ -34,13 +31,13 @@
           <div class="card-body p-0">
             <form onsubmit="postBMI(event)">
               <div class="row p-3">
-                <div class="col-12 col-lg-6">
+                <div class="col-6 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Usia</label>
                     <input class="form-control" required placeholder="00" id="age" type="number">
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-6 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Jenis Kelamin</label>
                     <select required class="form-select form-control form-control-sm" id="gender">
@@ -50,13 +47,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-6 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Berat <code>(kg)</code></label>
                     <input required class="form-control" placeholder="00" id="weight" type="number">
                   </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-6 col-lg-6">
                   <div class="form-group mb-2">
                     <label class="form-label mb-1 sm">Tinggi <code>(cm)</code></label>
                     <input required class="form-control" placeholder="00" id="height" type="number">
@@ -89,7 +86,9 @@
             <h6 class="card-title m-0">Grafil BMI</h6>
           </div>
           <div class="card-body p-0 d-flex align-items-center justify-content-center">
-            <canvas id="bmiChart"></canvas>
+            <div class="chart-wrapper">
+              <canvas id="bmiChart"></canvas>
+            </div>
           </div>
         </div>
       </div>
@@ -130,6 +129,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="script.js?ver=<?= date('ymdhis') ?>"></script>
 </body>
 

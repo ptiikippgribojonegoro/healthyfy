@@ -1,114 +1,144 @@
-let chart;
+let bmiChart;
 
+/* ======================
+   HITUNG BMI
+====================== */
 function calBMI(weight, heightCm) {
-  let heightM = heightCm / 100;
-  let bmi = weight / (heightM * heightM);
-  return bmi.toFixed(1);
+  const heightM = heightCm / 100;
+  const bmi = weight / (heightM * heightM);
+  return parseFloat(bmi.toFixed(1));
 }
 
+/* ======================
+   KATEGORI BMI
+====================== */
 function getCategoryBMI(bmi) {
-  if (bmi < 18.5) {
-    return "Kurus";
-  } else if (bmi < 25) {
-    return "Normal";
-  } else if (bmi < 30) {
-    return "Overweight";
-  } else {
-    return "Obesitas";
+  if (bmi < 18.5) return "Kurus";
+  if (bmi < 25) return "Normal";
+  if (bmi < 30) return "Overweight";
+  return "Obesitas";
+}
+
+/* ======================
+   WARNA KATEGORI
+====================== */
+function categoryColor(category) {
+  switch (category) {
+    case "Kurus":
+      return "bg-primary";
+    case "Normal":
+      return "bg-success";
+    case "Overweight":
+      return "bg-warning";
+    case "Obesitas":
+      return "bg-danger";
+    default:
+      return "bg-secondary";
   }
 }
 
+/* ======================
+   SUBMIT FORM
+====================== */
 function postBMI(e) {
   e.preventDefault();
 
-  const age = document.getElementById("age").value;
+  const age = parseInt(document.getElementById("age").value);
   const gender = document.getElementById("gender").value;
-  const weight = document.getElementById("weight").value;
-  const height = document.getElementById("height").value;
+  const weight = parseFloat(document.getElementById("weight").value);
+  const height = parseFloat(document.getElementById("height").value);
 
-  let bmi = calBMI(weight, height);
-  let category = getCategoryBMI(bmi);
-
-  document.getElementById("bmiReport").innerHTML = `
-  <h1 id="bmiValue">${bmi}</h1>
-  <h3><span id="bmiCategory" class="badge bg-danger badge-pill text-uppercase">${category}</span></h3>
-  `;
-}
-
-function hitungBMI() {
-  const usia = document.getElementById("usia").value;
-  const gender = document.getElementById("gender").value;
-  const berat = document.getElementById("berat").value;
-  const tinggi = document.getElementById("tinggi").value / 100;
-
-  if (!usia || !gender || !berat || !tinggi) {
-    alert("Lengkapi semua data!");
+  // VALIDASI
+  if (!age || !weight || !height || height <= 0 || weight <= 0) {
+    alert("Mohon isi data dengan benar");
     return;
   }
 
-  const bmi = berat / (tinggi * tinggi);
-  let kategori, aktivitas, makanan, gaya;
+  const bmi = calBMI(weight, height);
+  const category = getCategoryBMI(bmi);
+  const badgeColor = categoryColor(category);
 
-  if (bmi < 18.5) kategori = "Kurus";
-  else if (bmi < 25) kategori = "Normal";
-  else if (bmi < 30) kategori = "Gemuk";
-  else kategori = "Obesitas";
+  document.getElementById("bmiReport").innerHTML = `
+    <h1 id="bmiValue">${bmi}</h1>
+    <h3>
+      <span id="bmiCategory" class="badge ${badgeColor} text-uppercase">
+        ${category}
+      </span>
+    </h3>
+  `;
 
-  // Rekomendasi berbasis usia & gender
-  if (usia < 18) {
-    aktivitas = ["Olahraga ringan", "Permainan aktif", "Stretching"];
-    makanan = ["Gizi seimbang", "Susu & protein", "Buah segar"];
-    gaya = ["Tidur cukup", "Kurangi gadget", "Aktif bergerak"];
-  } else if (usia < 40) {
-    aktivitas =
-      gender === "pria"
-        ? ["Gym", "Jogging", "Bersepeda"]
-        : ["Yoga", "Cardio ringan", "Renang"];
-    makanan = ["Protein cukup", "Karbo kompleks", "Sayur & buah"];
-    gaya = ["Olahraga rutin", "Kelola stres", "Hidrasi cukup"];
-  } else {
-    aktivitas = ["Jalan pagi", "Senam ringan", "Peregangan"];
-    makanan = ["Rendah lemak", "Serat tinggi", "Gula rendah"];
-    gaya = ["Cek kesehatan rutin", "Tidur teratur", "Kelola stres"];
-  }
-
-  document.getElementById("nilaiBMI").innerText = bmi.toFixed(1);
-  document.getElementById("kategoriBMI").innerText = kategori;
-
-  isiList("aktivitas", aktivitas);
-  isiList("makanan", makanan);
-  isiList("gayahidup", gaya);
-
-  tampilkanChart(bmi);
+  chartBMI(category);
 }
 
-function isiList(id, data) {
-  const ul = document.getElementById(id);
-  ul.innerHTML = "";
-  data.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    ul.appendChild(li);
-  });
-}
-
-function tampilkanChart(bmi) {
+/* ======================
+   PIE CHART BMI
+====================== */
+function chartBMI(kategori) {
   const ctx = document.getElementById("bmiChart");
-  if (chart) chart.destroy();
 
-  chart = new Chart(ctx, {
-    type: "bar",
+  // Proporsi edukatif kategori BMI
+  const dataKategori = {
+    Kurus: 18.5,
+    Normal: 24.9,
+    Overweight: 29.9,
+    Obesitas: 40,
+  };
+
+  const labels = Object.keys(dataKategori);
+  const values = Object.values(dataKategori);
+
+  const colors = {
+    Kurus: "#90CAF9",
+    Normal: "#A5D6A7",
+    Overweight: "#FFE082",
+    Obesitas: "#EF9A9A",
+  };
+
+  if (bmiChart) bmiChart.destroy();
+
+  bmiChart = new Chart(ctx, {
+    type: "pie",
     data: {
-      labels: ["Kurus", "Normal", "Gemuk", "Obesitas", "BMI Anda"],
+      labels: labels,
       datasets: [
         {
-          data: [18.5, 24.9, 29.9, 35, bmi],
+          data: values,
+          backgroundColor: labels.map((l) => colors[l]),
+          borderWidth: labels.map((l) => (l === kategori ? 4 : 1)),
+          borderColor: labels.map((l) =>
+            l === kategori ? "#2E7D32" : "#ffffff"
+          ),
         },
       ],
     },
     options: {
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 40 } },
+      responsive: true,
+      plugins: {
+        tooltip: { enabled: false },
+        legend: {
+          display: false,
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+          },
+        },
+        datalabels: {
+          color: "#333",
+          font: {
+            weight: "bold",
+            size: 12,
+          },
+          formatter: (value, ctx) => {
+            const total = ctx.chart.data.datasets[0].data.reduce(
+              (a, b) => a + b,
+              0
+            );
+            const percent = ((value / total) * 100).toFixed(1);
+            return `${ctx.chart.data.labels[ctx.dataIndex]}\n${percent}%`;
+          },
+        },
+      },
     },
+    plugins: [ChartDataLabels],
   });
 }
